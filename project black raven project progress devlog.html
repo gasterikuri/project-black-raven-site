@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style2.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Black Raven Support Page</title>
+    <link
+      rel="icon"
+      href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841"
+      type="image/x-icon"
+    />
+    <style>
+      /* Default (Light Mode) Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffeeee;
+      }
+
+      /* Glassy Header Banner */
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        text-align: center;
+        padding: 1em;
+        color: #fff;
+      }
+
+      nav {
+        background-color: #555;
+        text-align: center;
+        padding: 0.5em;
+      }
+
+      /* Glassy Nav Links */
+      nav a {
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 1em;
+        margin: 0 0.5em;
+        color: #fff;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        transition: background 0.5s, transform 0.3s;
+      }
+
+      nav a:hover,
+      nav a:focus {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .video-box {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 560px;
+        float: right;
+        border-radius: 15px;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .announcement {
+        list-style-type: none;
+      }
+
+      /* Glassy Button Effect for the Dark Mode Toggle */
+      button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition: background 0.5s, transform 0.3s;
+      }
+
+      button:hover,
+      button:focus {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+
+      /* Dark Mode Overrides */
+      .dark-mode {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .dark-mode header {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        color: #fff;
+      }
+
+      .dark-mode nav {
+        background-color: #666;
+      }
+
+      .dark-mode nav a {
+        /* Glass effect remains */
+        color: #fff;
+      }
+
+      .dark-mode .video-box {
+        background-color: #444;
+        border: 1px solid #888;
+      }
+
+      .dark-mode footer {
+        background-color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>❄️ Project Black Raven Development ❄️</h1>
+    </header>
+    <nav>
+      <a href="https://project-black-raven.glitch.me/">Home</a>
+      <a href="https://project-black-raven.glitch.me/terms%20of%20use.html"
+        >Terms of Service</a
+      >
+      <a href="site-news.html">Site News</a>
+    </nav>
+    <!-- The Toggle Button for Dark Mode with Glass Effect -->
+    <button id="toggle-dark-mode">Toggle Dark Mode</button>
+    <section>
+      <h2>Welcome to the Project Black Raven Project Devlog and Updates</h2>
+      <p>Site is online!</p>
+      <ul class="announcement">
+        <li>
+          ANNOUNCEMENT: The site is back under active development, so stand by
+          for more info.
+        </li>
+      </ul>
+      <div class="video-box">
+        <h1>Project Starlight Game First Look Sneak Peek</h1>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/hJwIFd6m7Es"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-box">
+        <h1>Level 2 Progress Update</h1>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ldyglUOYysw"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-box">
+        <h1>Mini Demo Release</h1>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/lRVskFI25ss"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-box">
+        <h1>Final Trailer Video for Project Starlight</h1>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/vwP6vloZxEE"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <h1>Project Starlight First Look Devlog</h1>
+      <img src="pBfLFe.jpg" alt="game cover" />
+      <h2>Planned Additions to Project Starlight</h2>
+      <p style="color: blue">
+        Things I want to add before the full demo release:
+      </p>
+      <ul>
+        <li style="color: blue">
+          Adding a functional main menu that has adjustable graphics options for
+          better performance.
+        </li>
+      </ul>
+      <h1>Continued Updates</h1>
+      <ul class="announcement">
+        <li>
+          New upcoming version release: All 10 levels are nearly complete and
+          the full game will be released soon. A current date is not set for the
+          release, but it will most likely be in the coming months, possibly in
+          late March.
+        </li>
+        <li>
+          The game's full release will mark the end of the main development
+          phase and will then enter the periodic update phase. These updates
+          will include new levels, more music, and bug fixes as well as UI
+          improvements. Updated 2025 periodic updates will not be added as the
+          project has been a total failure and clearly no one is interested in
+          project starlight and as such i see no reason to update it :(
+        </li>
+        <li>
+          Thank you all for following the development of Project Starlight.
+        </li>
+      </ul>
+      <h1>Update</h1>
+      <ul class="announcement">
+        <li>Release date is March 15th.</li>
+      </ul>
+      <h1>Project Starlight Download</h1>
+      <a href="https://project-black-raven.itch.io/project-star-light"
+        >Project Starlight on itch.io</a
+      >
+      <h1>
+        Project Starlight has been released. This is the end of main updates for
+        the project.
+      </h1>
+      <ul class="announcement">
+        <li>
+          It has been a long and tough development process so far, and I'm
+          finally glad after 5 months of hard work to officially release Project
+          Star Light for the public to play. All 90 percent of the game's assets
+          belong to me except for some minor sprites and particles. Please do
+          not take my sprites or game assets and claim them as your own.
+        </li>
+      </ul>
+      <h1>What's next?</h1>
+      <ul class="announcement">
+        <li>Check the project info section below for details.</li>
+      </ul>
+      <h1>Projects Info</h1>
+      <ul class="announcement">
+        <li>
+          A new project is already planned and will soon be in the works. I have
+          many projects planned; however, I will be taking some time to polish
+          out the planning for the next project. I will release more info as I
+          see fit. Enjoy Project Starlight, and I hope to improve with future
+          project releases. Thank you for sticking with me during the
+          development of Project Starlight.
+        </li>
+      </ul>
+      <h1>New Project Announcement</h1>
+      <ul class="announcement">
+        <li>
+          A new project is in the works. It's called Project Silver Light. The
+          project is currently in the planning phase. For now, that's all I'll
+          say for now.
+        </li>
+        <li>
+          The project will most likely take at least 1 year to complete. I will
+          update this devlog with the progress of the project as I reach
+          milestones.
+        </li>
+      </ul>
+
+      <ul class="announcement">
+        <footer
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            text-align: center;
+            padding: 0.5em;
+            font-size: 0.9em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+          "
+        >
+          <p>&copy; 2025 Project Black Raven</p>
+          <a href="https://project-black-raven.itch.io/">
+            <button
+              style="
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff;
+                padding: 8px 16px;
+                font-size: 0.9em;
+                border-radius: 10px;
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                cursor: pointer;
+                transition: background 0.5s, transform 0.3s;
+              "
+            >
+              Visit My Itch.io Page
+            </button>
+          </a>
+        </footer>
+      </ul>
+    </section>
+  </body>
+</html>
