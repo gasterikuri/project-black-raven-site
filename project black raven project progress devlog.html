@@ -1,298 +1,72 @@
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="style2.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Black Raven Support Page</title>
-    <link rel="icon" href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841" type="image/x-icon" />
-    <style>
-      body {
-        background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #222;
-      }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Black Raven Support</title>
+    <link rel="stylesheet" href="modern-style.css">
+    <link rel="icon" href="black-raven-icon.ico" type="image/x-icon">
+</head>
+<body>
 
-      header {
-        background: rgba(255, 255, 255, 0.15);
-        padding: 1.5em 0 1em 0;
-        text-align: center;
-        border-bottom: 2px solid #333;
-        border-radius: 0 0 15px 15px;
-        margin-bottom: 1em;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      header h1 {
-        margin: 0;
-        font-size: 2.5em;
-        letter-spacing: 2px;
-        color: #222;
-      }
-
-      nav {
-        background-color: #e3e3e3;
-        padding: 12px 0;
-        display: flex;
-        justify-content: center;
-        border-radius: 0 0 15px 15px;
-        margin-bottom: 2em;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
-      }
-
-      nav a {
-        color: #333;
-        margin: 0 18px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.1em;
-        padding: 4px 10px;
-        border-radius: 5px;
-        transition: background 0.2s, color 0.2s;
-      }
-
-      nav a:hover, nav a:focus {
-        background: #333;
-        color: #fff;
-      }
-
-      .announcement {
-        background: #fffbe7;
-        border-left: 4px solid #ffd700;
-        padding: 1.2em;
-        margin: 2em 0;
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-        font-size: 1.1em;
-      }
-
-      .video-box {
-        margin: 2em 0;
-        padding: 1.5em;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-        text-align: center;
-      }
-
-      .video-box h1 {
-        font-size: 1.2em;
-        margin-bottom: 1em;
-        color: #333;
-      }
-
-      button {
-        background: rgba(51, 51, 51, 0.14);
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 1em;
-        border-radius: 10px;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        cursor: pointer;
-        transition: background 0.5s, transform 0.3s;
-      }
-
-      button:hover,
-      button:focus {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-5px);
-      }
-
-      /* Dark Mode Overrides */
-      .dark-mode {
-        background-color: #333;
-        color: #fff;
-      }
-
-      .dark-mode header {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        color: #fff;
-      }
-
-      .dark-mode nav {
-        background-color: #666;
-      }
-
-      .dark-mode nav a {
-        color: #fff;
-      }
-
-      .dark-mode .video-box {
-        background-color: #444;
-        border: 1px solid #888;
-      }
-
-      .dark-mode footer {
-        background-color: #222;
-      }
-    </style>
-  </head>
-  <body>
+    <!-- Navigation Bar -->
     <header>
-      <h1>❄️ Project Black Raven Development ❄️</h1>
+        <div class="container">
+            <h1>Project Black Raven</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="news.html">Site News</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="terms%20of%20use.html">Terms of Service</a>
-      <a href="site news.html">Site News</a>
-    </nav>
-    <!-- The Toggle Button for Dark Mode with Glass Effect -->
-    <button id="toggle-dark-mode">Toggle Dark Mode</button>
-    <section>
-      <h2>Welcome to the Project Black Raven Project Devlog and Updates</h2>
-      <p>Site is online!</p>
-      <ul class="announcement">
-        <li>
-          ANNOUNCEMENT: The site is back under active development, so stand by
-          for more info.
-        </li>
-      </ul>
-      <div class="video-box">
-        <h1>Project Starlight Game First Look Sneak Peek</h1>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/hJwIFd6m7Es"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div class="video-box">
-        <h1>Level 2 Progress Update</h1>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/ldyglUOYysw"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div class="video-box">
-        <h1>Mini Demo Release</h1>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/your_mini_demo_video_id"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div class="video-box">
-        <h1>Final Trailer Video for Project Starlight</h1>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/vwP6vloZxEE"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <h1>Project Starlight First Look Devlog</h1>
-      <img src="pBfLFe.jpg" alt="game cover" />
-      <h2>Planned Additions to Project Starlight</h2>
-      <p style="color: blue">
-        Things I want to add before the full demo release:
-      </p>
-      <ul>
-        <li style="color: blue">
-          Adding a functional main menu that has adjustable graphics options for
-          better performance.
-        </li>
-      </ul>
-      <h1>Continued Updates</h1>
-      <ul class="announcement">
-        <li>
-          New upcoming version release: All 10 levels are nearly complete and
-          the full game will be released soon. A current date is not set for the
-          release, but it will most likely be in the coming months, possibly in
-          late March.
-        </li>
-        <li>
-          The game's full release will mark the end of the main development
-          phase and will then enter the periodic update phase. These updates
-          will include new levels, more music, and bug fixes as well as UI
-          improvements. Updated 2025 periodic updates will not be added as the
-          project has been a total failure and clearly no one is interested in
-          project starlight and as such i see no reason to update it :(
-        </li>
-        <li>
-          Thank you all for following the development of Project Starlight.
-        </li>
-      </ul>
-      <h1>Update</h1>
-      <ul class="announcement">
-        <li>Release date is March 15th.</li>
-      </ul>
-      <h1>Project Starlight Download</h1>
-      <a href="https://project-black-raven.itch.io/project-star-light"
-        >Project Starlight on itch.io</a
-      >
-      <h1>
-        Project Starlight has been released. This is the end of main updates for
-        the project.
-      </h1>
-      <ul class="announcement">
-        <li>
-          It has been a long and tough development process so far, and I'm
-          finally glad after 5 months of hard work to officially release Project
-          Star Light for the public to play. All 90 percent of the game's assets
-          belong to me except for some minor sprites and particles. Please do
-          not take my sprites or game assets and claim them as your own.
-        </li>
-      </ul>
-      <h1>What's next?</h1>
-      <ul class="announcement">
-        <li>Check the project info section below for details.</li>
-      </ul>
-      <h1>Projects Info</h1>
-      <ul class="announcement">
-        <li>
-          A new project is already planned and will soon be in the works. I have
-          many projects planned; however, I will be taking some time to polish
-          out the planning for the next project. I will release more info as I
-          see fit. Enjoy Project Starlight, and I hope to improve with future
-          project releases. Thank you for sticking with me during the
-          development of Project Starlight.
-        </li>
-      </ul>
-      <h1>New Project Announcement</h1>
-      <ul class="announcement">
-        <li>
-          A new project is in the works. It's called Project Silver Light. The
-          project is currently in the planning phase. For now, that's all I'll
-          say for now.
-        </li>
-        <li>
-          The project will most likely take at least 1 year to complete. I will
-          update this devlog with the progress of the project as I reach
-          milestones.
-        </li>
-      </ul>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Welcome to Project Black Raven Support</h2>
+            <p>Your go-to resource for updates, help, and community discussions.</p>
+            <a href="#" class="btn">Contact Support</a>
+        </div>
     </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements">
+        <div class="container">
+            <h2>Latest Announcements</h2>
+            <div class="announcement-box">
+                <p>🚀 The site is back under active development! Stay tuned for updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="videos">
+        <div class="container">
+            <h2>Project Starlight Sneak Peek</h2>
+            <div class="video-grid">
+                <div class="video-box">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/hJwIFd6m7Es" frameborder="0" allowfullscreen></iframe>
+                    <p>Project Starlight - First Look</p>
+                </div>
+                <div class="video-box">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ldyglUOYysw" frameborder="0" allowfullscreen></iframe>
+                    <p>Level 2 Progress Update</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      <p>&copy; 2025 Project Black Raven. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Project Black Raven. All rights reserved.</p>
+        </div>
     </footer>
-    <script>
-      // Dark Mode Toggle Script (unchanged)
-      const toggleBtn = document.getElementById('toggle-dark-mode');
-      toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-      });
-    </script>
-  </body>
+
+</body>
 </html>
