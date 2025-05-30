@@ -2,343 +2,211 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Project Black Raven - Innovative game development and creative projects." />
-    <meta name="keywords" content="Black Raven, game development, creative projects" />
-    <meta name="author" content="Your Name" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Project Black Raven</title>
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841"
-      type="image/x-icon"
-    />
-    <!-- Google Font for overlays (Roboto) -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- External Stylesheet (if needed) -->
+    <link rel="icon" href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <style>
-      /* Global Reset and Base Styles */
-      * {
-        box-sizing: border-box;
+      body {
+        background: linear-gradient(135deg, #e0eafc, #cfdef3);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #222;
         margin: 0;
         padding: 0;
       }
-      
-      html,
-      body {
-        height: 100%;
-      }
-      
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #121212;
-        color: #e0e0e0;
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      
-      /* Page Content with Glossy Glass (Frosted Glass) Effect */
       .page-content {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px) saturate(180%);
-        -webkit-backdrop-filter: blur(10px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 10px;
-        transition: filter 0.5s ease, background 0.5s ease;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2em 1em 2em 1em;
       }
-      
-      /* Header & Navigation */
       header {
-        background-color: #1e1e1e;
-        color: #8c00ff;
-        padding: 1.5em 0;
+        background: rgba(44, 62, 80, 0.9);
+        color: #f7ff08;
+        border-radius: 0 0 15px 15px;
+        padding: 2em 0 1em 0;
         text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       }
-      
-      nav {
-        margin-top: 1em;
+      header h1 {
+        margin: 0 0 0.3em 0;
+        font-size: 2.5em;
+        letter-spacing: 2px;
       }
-      
       nav ul {
         list-style: none;
+        padding: 0;
         display: flex;
         justify-content: center;
+        gap: 28px;
+        margin: 0;
       }
-      
       nav ul li {
-        margin: 0 15px;
+        display: inline-block;
       }
-      
-      nav ul li a {
+      nav a {
+        color: #f7ff08;
         text-decoration: none;
-        color: #fff;
         font-weight: bold;
-        transition: color 0.3s ease;
+        font-size: 1.1em;
+        border-radius: 5px;
+        padding: 4px 12px;
+        transition: background 0.2s, color 0.2s;
       }
-      
-      nav ul li a:hover,
-      nav ul li a:focus {
-        color: #8c00ff;
+      nav a:hover, nav a:focus {
+        background: #f7ff08;
+        color: #2c3e50;
       }
-      
-      /* Main Content */
-      main {
-        max-width: 800px;
-        margin: 2em auto;
-        background-color: #1e1e1e;
-        padding: 2em;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-      
-      .branding {
+      section.branding {
+        margin: 2em 0 1.5em 0;
         text-align: center;
-        margin-bottom: 2em;
       }
-      
-      .branding img {
-        max-width: 200px;
+      section.branding img {
+        max-width: 220px;
+        width: 70%;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.09);
       }
-      
-      .info p {
+      section.info {
+        margin: 2em 0;
+        background: #fff;
+        padding: 2em;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      section.info h2 {
+        color: #222;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 0.3em;
+        margin-top: 1.5em;
+        margin-bottom: 0.7em;
+      }
+      section.info p {
         margin-bottom: 1em;
       }
-      
-      .info a {
-        color: #8c00ff;
-        text-decoration: none;
-      }
-      
-      .info a:hover,
-      .info a:focus {
-        text-decoration: underline;
-      }
-      
-      /* Footer */
       footer {
-        background: transparent;
-        color: #ccc;
+        background: #2c3e50;
+        color: #fff;
         text-align: center;
-        padding: 0;
-        font-size: 0.9em;
-        max-width: 800px;
-        margin: 50px auto 1em;
+        padding: 1.2em 0;
+        border-radius: 15px 15px 0 0;
+        margin-top: 2.5em;
+        font-size: 1.05em;
       }
-      
-      footer p {
-        margin: 0.5em 0;
-      }
-      
-      /* Social Buttons with Glass Effect */
+      /* Floating Social Buttons */
       .social-buttons {
         position: fixed;
-        right: 20px;
-        top: 20%;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
         display: flex;
         flex-direction: column;
+        gap: 14px;
+        z-index: 1000;
       }
-      
-      .social-buttons a {
-        margin: 10px 0;
-        padding: 10px 20px;
-        /* Glassy translucent background with a frosted glass look */
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px 18px 12px 14px;
+        background: #444;
         color: #fff;
         text-decoration: none;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        transition: background 0.5s, transform 0.3s;
+        border-radius: 8px 0 0 8px;
+        font-weight: bold;
+        font-size: 1em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        transition: background 0.2s, transform 0.18s;
       }
-      
-      .social-buttons a:hover,
-      .social-buttons a:focus {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-5px);
+      .social-btn:hover {
+        background: #007BFF;
+        color: #fff;
+        transform: translateX(-5px) scale(1.07);
       }
-      
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-10px); }
-        60% { transform: translateY(-5px); }
+      .social-btn svg {
+        margin-right: 7px;
+        fill: currentColor;
+        width: 20px;
+        height: 20px;
       }
-      
-      /* Maintenance Notification Overlay with Glossy Glass Effect */
-      .maintenance-notification {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
-      }
-      
-      .maintenance-notification .message-box {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px) saturate(180%);
-        -webkit-backdrop-filter: blur(10px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 2em;
-        border-radius: 10px;
-        max-width: 600px;
-        width: 90%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-        font-family: 'Roboto', sans-serif;
-      }
-      
-      .maintenance-notification h2 {
-        margin-bottom: 0.5em;
-        color: #007BFF;
-      }
-      
-      .maintenance-notification p {
-        color: #007BFF;
-        font-size: 1.1em;
-      }
-      
-      /* Mobile Styles */
-      @media (max-width: 600px) {
-        main {
-          max-width: 95%;
-          margin: 1em auto;
+      @media (max-width: 700px) {
+        .page-content {
+          padding: 1em 0.2em 1em 0.2em;
+        }
+        section.info {
           padding: 1em;
         }
-        
-        header,
-        footer {
-          padding: 1em 0;
-        }
-        
-        nav ul {
-          flex-direction: column;
-          align-items: center;
-        }
-        
-        nav ul li {
-          margin: 5px 0;
-        }
-        
         .social-buttons {
-          display: none;
+          top: auto;
+          bottom: 18px;
+          right: 8px;
+          transform: none;
+          flex-direction: row;
+          gap: 6px;
         }
-        
-        .maintenance-notification .message-box {
-          padding: 1em;
-          max-width: 90%;
+        .social-btn {
+          padding: 10px 14px 10px 10px;
+          font-size: 0.98em;
+          border-radius: 8px;
         }
       }
     </style>
   </head>
   <body>
-    <!-- Page Content Wrap with Glass Effect -->
     <div class="page-content">
-      <!-- Header Section -->
       <header>
         <h1>Project Black Raven</h1>
         <nav>
           <ul>
-            <li>
-              <a href="https://project-black-raven.glitch.me/terms%20of%20use.html">Terms of Use</a>
-            </li>
-            <li>
-              <a href="project%20black%20raven%20project%20progress%20devlog.html">More Information</a>
-            </li>
+            <li><a href="terms%20of%20use.html">Terms of Use</a></li>
+            <li><a href="project%20black%20raven%20project%20progress%20devlog.html">More Information</a></li>
+            <li><a href="site news.html">Site News</a></li>
           </ul>
         </nav>
       </header>
-      
-      <!-- Main Content -->
-      <main>
-        <section class="branding">
-          <a href="#">
-            <img src="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/project%20black%20raven%20logo%20offical.png?v=1671227760752" alt="Project Black Raven Logo" />
-          </a>
-        </section>
-        <section class="info">
+      <section class="branding">
+        <a href="#">
+          <img src="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/project%20black%20raven%20logo%20offical.png?v=1671227760752" alt="Project Black Raven Logo" />
+        </a>
+      </section>
+      <section class="info">
+        <p>
+          For business inquiries, please email us at
+          <a href="mailto:ProjectBlackRavenDevolpment@outlook.com">ProjectBlackRavenDevolpment@outlook.com</a>.
+        </p>
+        <article>
+          <h2>About Us</h2>
           <p>
-            For business inquiries, please email us at
-            <a href="mailto:ProjectBlackRavenDevolpment@outlook.com">ProjectBlackRavenDevolpment@outlook.com</a>.
+            Project Black Raven is a development team dedicated to creating innovative projects.
+            We strive to deliver high-quality creations and unforgettable experiences.
           </p>
-          <article>
-            <h2>About Us</h2>
-            <p>
-              Project Black Raven is a development team dedicated to creating innovative projects.
-              We strive to deliver high-quality creations and unforgettable experiences.
-            </p>
-          </article>
-          <article>
-            <h2>Site Information</h2>
-            <p>
-              This site is maintained solely by me, the creator. "Project Black Raven" is both the idea and the brand behind
-              my work. Thank you for visiting!
-            </p>
-          </article>
-        </section>
-      </main>
-      
-      <!-- Social Buttons (Fixed Sidebar) -->
-      <div class="social-buttons">
-        <a href="https://x.com/Enamori_Ikuri" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <a href="https://beacons.ai/enamori" target="_blank" rel="noopener noreferrer">Beacons.ai</a>
-        <a href="https://discord.gg/2bpa6T4npf" target="_blank" rel="noopener noreferrer">Discord Server</a>
-        <a href="https://twitch.tv/enamori_ikuri" target="_blank" rel="noopener noreferrer">Twitch</a>
-        <a href="https://deviantart.com/gasterikeri" target="_blank" rel="noopener noreferrer">DeviantArt</a>
-        <a href="https://project-black-raven.itch.io/" class="itchio-button" target="_blank" rel="noopener noreferrer">Visit our itch.io page</a>
-      </div>
-      
-      <!-- Footer -->
-      <footer>
-        <p>&copy; 2025 Project Black Raven. All Rights Reserved.</p>
-        <p>Maintained by: Enamori ikuri</p>
-      </footer>
+        </article>
+        <article>
+          <h2>Site Information</h2>
+          <p>
+            This site is maintained solely by me, the creator. "Project Black Raven" is both the idea and the brand behind
+            my work. Thank you for visiting!
+          </p>
+        </article>
+      </section>
     </div>
-    
-    <!-- Maintenance Notification Overlay -->
-    <div id="maintenance-notification" class="maintenance-notification">
-      <div class="message-box">
-        <h2>Site Maintenance</h2>
-        <p>We are currently undergoing changes. Please come back later.</p>
-      </div>
+    <!-- Floating Social Buttons -->
+    <div class="social-buttons">
+      <a href="https://twitter.com/yourprofile" class="social-btn twitter" target="_blank" rel="noopener">
+        <!-- Twitter SVG icon -->
+        <svg viewBox="0 0 24 24"><path d="M22.46 5.93c-.8.35-1.64.58-2.53.69a4.44 4.44 0 001.93-2.44 8.87 8.87 0 01-2.8 1.07A4.43 4.43 0 0016.11 4c-2.44 0-4.43 1.98-4.43 4.43 0 .35.04.7.11 1.03-3.68-.18-6.94-1.95-9.12-4.64a4.41 4.41 0 00-.6 2.23c0 1.53.78 2.89 1.98 3.69a4.44 4.44 0 01-2.01-.55v.06c0 2.14 1.52 3.92 3.54 4.32-.37.1-.75.16-1.14.16-.28 0-.55-.03-.82-.08.55 1.72 2.16 2.97 4.07 3a8.9 8.9 0 01-5.5 1.9c-.36 0-.72-.02-1.07-.06A12.54 12.54 0 006.29 21c8.06 0 12.47-6.68 12.47-12.47 0-.19-.01-.39-.02-.58.85-.62 1.59-1.41 2.18-2.3z"></path></svg>
+        Twitter
+      </a>
+      <a href="https://github.com/gasterikuri" class="social-btn github" target="_blank" rel="noopener">
+        <!-- GitHub SVG icon -->
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.35-3.37-1.35-.45-1.17-1.1-1.48-1.1-1.48-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.9.86.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.25-.45-1.28.1-2.66 0 0 .84-.28 2.75 1.05a9.21 9.21 0 012.5-.34c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.38.2 2.41.1 2.66.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.06.36.32.68.94.68 1.89v2.81c0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"></path></svg>
+        GitHub
+      </a>
+      <!-- Add more social buttons as needed -->
     </div>
-    
-    <!-- Simple Toggle Script -->
-    <script>
-      // Change this variable to true to enable the maintenance overlay or false to disable it.
-      const maintenanceMode = false; // Set to true for maintenance mode
-      
-      function updateMaintenanceMode(state) {
-        const notification = document.getElementById("maintenance-notification");
-        const pageContent = document.querySelector(".page-content");
-        if (state) {
-          notification.style.display = "flex";
-          pageContent.style.filter = "blur(5px)";
-        } else {
-          notification.style.display = "none";
-          pageContent.style.filter = "none";
-        }
-      }
-      
-      document.addEventListener("DOMContentLoaded", () => {
-        updateMaintenanceMode(maintenanceMode);
-      });
-    </script>
-    
-    <!-- External Script (if needed) -->
-    <script src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"></script>
+    <footer>
+      &copy; 2025 Project Black Raven. All rights reserved.
+    </footer>
   </body>
 </html>
+       
+    
