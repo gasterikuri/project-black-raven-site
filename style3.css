@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  background: url("https://cdn.photoroom.com/v2/image-cache?path=gs://background-7ef44.appspot.com/backgrounds_v3/christmas/42_-_christmas.jpg") 
+  background: url("https://raw.githubusercontent.com/gasterikuri/project-black-raven-site/main/image_2025-05-30_201919344.png") 
     no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh; /* Ensures full viewport coverage */
