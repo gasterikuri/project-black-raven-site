@@ -10,7 +10,6 @@
       href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841"
       type="image/x-icon"
     />
-
     <style>
       /* Default (Light Mode) Styles */
       body {
@@ -38,6 +37,7 @@
         padding: 0.5em;
       }
 
+      /* Glassy Nav Links */
       nav a {
         text-decoration: none;
         background: rgba(255, 255, 255, 0.1);
@@ -61,6 +61,16 @@
         padding: 20px;
       }
 
+      .video-box {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 560px;
+        float: right;
+        border-radius: 15px;
+      }
+
       footer {
         background-color: #333;
         color: #fff;
@@ -74,9 +84,60 @@
       .announcement {
         list-style-type: none;
       }
+
+      /* Glassy Button Effect for the Dark Mode Toggle */
+      button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition: background 0.5s, transform 0.3s;
+      }
+
+      button:hover,
+      button:focus {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+
+      /* Dark Mode Overrides */
+      .dark-mode {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .dark-mode header {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        color: #fff;
+      }
+
+      .dark-mode nav {
+        background-color: #666;
+      }
+
+      .dark-mode nav a {
+        color: #fff;
+      }
+
+      .dark-mode .video-box {
+        background-color: #444;
+        border: 1px solid #888;
+      }
+
+      .dark-mode footer {
+        background-color: #222;
+      }
     </style>
   </head>
-
   <body>
     <header>
       <h1>❄️ Project Black Raven Development ❄️</h1>
@@ -84,15 +145,14 @@
 
     <nav>
       <a href="index.html">Home</a>
-    </nav>
 
-    <section>
-      <h1>Announcements</h1>
       <ul class="announcement">
         <li>
           It has been a long and tough development process so far, and I'm
           finally glad after 5 months of hard work to officially release Project
-          Star Light...
+          Star Light for the public to play. All 90 percent of the game's assets
+          belong to me except for some minor sprites and particles. Please do
+          not take my sprites or game assets and claim them as your own.
         </li>
       </ul>
 
@@ -104,38 +164,25 @@
       <h1>Projects Info</h1>
       <ul class="announcement">
         <li>
-          A new project is already planned and will soon be in the works...
+          A new project is already planned and will soon be in the works. I have
+          many projects planned; however, I will be taking some time to polish
+          out the planning for the next project. I will release more info as I
+          see fit. Enjoy Project Starlight, and I hope to improve with future
+          project releases. Thank you for sticking with me during the
+          development of Project Starlight.
         </li>
       </ul>
 
       <h1>New Project Announcement</h1>
       <ul class="announcement">
         <li>
-          A new project is in the works. It's called Project Silver Light...
+          A new project is in the works. It's called Project Silver Light. The
+          project is currently in the planning phase. For now, that's all I'll
+          say for now.
         </li>
         <li>
-          The project will most likely take at least 1 year to complete...
-        </li>
-      </ul>
-
-      <h1>The First Fallen Human Devlog</h1>
-      <h2>Devlog 1</h2>
-      <p>
-        The game is in its really early stages and is nowhere near complete...
-      </p>
-
-      <h2>Devlog 2</h2>
-      <p>
-        The game has come along good so far. The game has 8 rooms so far and I'm
-        adding text interaction...
-      </p>
-    </section>
-
-    <footer>
-      <p>© Project Black Raven Development</p>
-    </footer>
-  </body>
-</html>
+          The project will most likely take at least 1 year to complete. I will
+          update this devlog with the progress of
 
 
 
