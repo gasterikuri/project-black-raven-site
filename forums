@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project Black Raven Community Forum" />
+  <title>Forum — Project Black Raven</title>
+
+  <link rel="icon" href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0c;
+      --deep:    #101014;
+      --surface: #16161c;
+      --card:    #1c1c24;
+      --card2:   #22222e;
+      --border:  rgba(255,255,255,0.08);
+      --gold:    #c8a96e;
+      --gold2:   #e8c98a;
+      --text:    #e4e2dc;
+      --muted:   #888690;
+      --general: #5b8dd9;
+      --bug:     #d95b5b;
+      --suggest: #5bd9a0;
+      --fan:     #c45bd9;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--deep);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,169,110,0.3) 50%, transparent);
+    }
+
+    .site-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem; }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.07); }
+    nav a.active { color: var(--gold); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--deep);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 500px; height: 260px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-eyebrow::before, .page-eyebrow::after {
+      content: ''; display: block;
+      width: 24px; height: 1px;
+      background: var(--gold); opacity: 0.4;
+    }
+
+    .page-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-hero p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .new-post-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0.65rem 1.6rem;
+      background: var(--gold);
+      color: #0a0a0c;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .new-post-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 2rem;
+      gap: 2rem;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .category-list { list-style: none; }
+
+    .category-list li { margin-bottom: 3px; }
+
+    .cat-btn {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: background 0.2s, color 0.2s;
+      text-align: left;
+    }
+
+    .cat-btn:hover { background: var(--surface); color: var(--text); }
+    .cat-btn.active { background: var(--card); color: var(--text); }
+
+    .cat-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cat-count {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 1px 7px;
+      border-radius: 10px;
+    }
+
+    /* ── MAIN FORUM ── */
+    .forum-main { flex: 1; min-width: 0; }
+
+    .forum-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .forum-toolbar h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.06em;
+    }
+
+    .sort-select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* ── POST CARD ── */
+    .post-list { display: flex; flex-direction: column; gap: 1px; }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: 8px;
+    }
+
+    .post-card:hover {
+      border-color: rgba(200,169,110,0.25);
+      background: var(--card2);
+    }
+
+    .post-meta-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .post-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+
+    .post-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+    .post-body { flex: 1; min-width: 0; }
+
+    .post-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-excerpt {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 300;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .tag-general  { background: rgba(91,141,217,0.15); color: var(--general); }
+    .tag-bug      { background: rgba(217,91,91,0.15);  color: var(--bug); }
+    .tag-suggest  { background: rgba(91,217,160,0.15); color: var(--suggest); }
+    .tag-fan      { background: rgba(196,91,217,0.15); color: var(--fan); }
+
+    .post-time {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .post-stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .stat { display: flex; align-items: center; gap: 4px; }
+
+    /* ── LOADING / EMPTY ── */
+    .state-box {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+
+    .state-box .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .state-box p { font-size: 0.88rem; font-weight: 300; }
+
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 2rem;
+    }
+
+    .page-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .page-btn:hover, .page-btn.active {
+      color: var(--gold);
+      border-color: rgba(200,169,110,0.35);
+    }
+
+    .page-btn:disabled { opacity: 0.35; cursor: default; }
+
+    /* ── NEW POST MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5,5,7,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .modal h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .modal p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .modal label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal select, .modal input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .modal select:focus, .modal input:focus {
+      border-color: rgba(200,169,110,0.45);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+    }
+
+    .btn-cancel {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.6rem 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-cancel:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+    .btn-submit {
+      background: var(--gold);
+      border: none;
+      color: #0a0a0c;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover { background: var(--gold2); }
+
+    /* ── NOTICE BAR ── */
+    .notice-bar {
+      background: rgba(200,169,110,0.07);
+      border-bottom: 1px solid rgba(200,169,110,0.15);
+      padding: 0.6rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .notice-bar a { color: var(--gold); text-decoration: none; }
+    .notice-bar a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      margin-top: auto;
+    }
+
+    footer p { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+    footer span { color: rgba(200,169,110,0.55); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .layout { padding: 0 1.25rem; margin: 1.5rem auto; }
+    }
+
+    @media (max-width: 480px) {
+      header { justify-content: center; text-align: center; }
+      .post-stats { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="https://gasterikuri.github.io/project-black-raven-site/" class="site-title">Project Black Raven</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="https://gasterikuri.github.io/project-black-raven-site/">Home</a></li>
+        <li><a href="terms of use.html">Terms</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="forum.html" class="active">Forum</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Notice bar -->
+  <div class="notice-bar">
+    Posts are powered by <a href="https://github.com/gasterikuri/project-black-raven-site/issues" target="_blank" rel="noopener">GitHub Issues</a>. A free GitHub account is required to post.
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Community</div>
+    <h1>Forum</h1>
+    <p>Discuss, report, and share with the Black Raven community.</p>
+    <button class="new-post-btn" onclick="openModal()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      New Post
+    </button>
+  </div>
+
+  <!-- Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <span class="sidebar-label">Categories</span>
+      <ul class="category-list">
+        <li>
+          <button class="cat-btn active" onclick="filterCategory('all', this)">
+            <span class="cat-dot" style="background:var(--gold)"></span>
+            All Posts
+            <span class="cat-count" id="count-all">—</span>
+          </button>
+        </li>
+        <li>
+          <button class="cat-btn" onclick="filterCategory('general', this)">
+            <span class="cat-dot" style="background:var(--general)"></span>
+            General
+            <span class="cat-count" id="count-general">—</span>
+          </button>
+        </li>
+        <li>
+          <button class="cat-btn" onclick="filterCategory('bug', this)">
+            <span class="cat-dot" style="background:var(--bug)"></span>
+            Bug Reports
+            <span class="cat-count" id="count-bug">—</span>
+          </button>
+        </li>
+        <li>
+          <button class="cat-btn" onclick="filterCategory('suggestion', this)">
+            <span class="cat-dot" style="background:var(--suggest)"></span>
+            Suggestions
+            <span class="cat-count" id="count-suggestion">—</span>
+          </button>
+        </li>
+        <li>
+          <button class="cat-btn" onclick="filterCategory('fan content', this)">
+            <span class="cat-dot" style="background:var(--fan)"></span>
+            Fan Content
+            <span class="cat-count" id="count-fan">—</span>
+          </button>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Forum Main -->
+    <main class="forum-main">
+      <div class="forum-toolbar">
+        <h2 id="category-title">All Posts</h2>
+        <select class="sort-select" onchange="changeSort(this.value)">
+          <option value="created">Newest</option>
+          <option value="updated">Recently Active</option>
+          <option value="comments">Most Replies</option>
+        </select>
+      </div>
+
+      <div class="post-list" id="post-list">
+        <div class="state-box">
+          <div class="spinner"></div>
+          <p>Loading posts&hellip;</p>
+        </div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </main>
+
+  </div>
+
+  <!-- New Post Modal -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h2 id="modal-title">New Post</h2>
+      <p>Posts are created as GitHub Issues. You'll be taken to GitHub to finish — a free account is required. Choose a category and enter your title below, then click Continue.</p>
+
+      <label for="post-category">Category</label>
+      <select id="post-category">
+        <option value="General">General</option>
+        <option value="Bug Report">Bug Report</option>
+        <option value="Suggestion">Suggestion</option>
+        <option value="Fan Content">Fan Content</option>
+      </select>
+
+      <label for="post-title">Post Title</label>
+      <input type="text" id="post-title" placeholder="What's on your mind?" maxlength="100" />
+
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <a class="btn-submit" id="modal-submit" href="#" target="_blank" rel="noopener" onclick="return buildIssueUrl()">Continue on GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Project Black Raven. <span>All rights reserved.</span></p>
+  </footer>
+
+  <script>
+    const REPO = 'gasterikuri/project-black-raven-site';
+    const API  = `https://api.github.com/repos/${REPO}/issues`;
+    const REPO_NEW = `https://github.com/${REPO}/issues/new`;
+
+    const CATEGORIES = ['general', 'bug', 'suggestion', 'fan content'];
+    const TAG_CLASS  = { general: 'tag-general', 'bug report': 'tag-bug', suggestion: 'tag-suggest', 'fan content': 'tag-fan' };
+    const TAG_LABEL  = { general: 'General', 'bug report': 'Bug Report', suggestion: 'Suggestion', 'fan content': 'Fan Content' };
+
+    let allIssues   = [];
+    let activeCategory = 'all';
+    let sortBy      = 'created';
+    let currentPage = 1;
+    const PER_PAGE  = 15;
+
+    async function fetchIssues() {
+      try {
+        const res = await fetch(`${API}?state=open&per_page=100&sort=${sortBy}`, {
+          headers: { Accept: 'application/vnd.github.v3+json' }
+        });
+        if (!res.ok) throw new Error(res.status);
+        allIssues = await res.json();
+        updateCounts();
+        renderPosts();
+      } catch (e) {
+        document.getElementById('post-list').innerHTML = `
+          <div class="state-box">
+            <span class="icon">⚠️</span>
+            <p>Could not load posts. The GitHub API may be rate-limited.<br>
+            <a href="https://github.com/${REPO}/issues" target="_blank" rel="noopener" style="color:var(--gold)">View posts directly on GitHub</a></p>
+          </div>`;
+      }
+    }
+
+    function getCategory(issue) {
+      const labels = issue.labels.map(l => l.name.toLowerCase());
+      for (const cat of CATEGORIES) {
+        if (labels.includes(cat)) return cat;
+      }
+      return 'general';
+    }
+
+    function updateCounts() {
+      document.getElementById('count-all').textContent = allIssues.length;
+      CATEGORIES.forEach(cat => {
+        const key = cat === 'bug' ? 'bug report' : cat;
+        const el = document.getElementById('count-' + cat);
+        if (el) el.textContent = allIssues.filter(i => getCategory(i) === key).length;
+      });
+    }
+
+    function renderPosts() {
+      const filtered = activeCategory === 'all'
+        ? allIssues
+        : allIssues.filter(i => getCategory(i) === activeCategory);
+
+      const sorted = [...filtered].sort((a, b) => {
+        if (sortBy === 'comments') return b.comments - a.comments;
+        if (sortBy === 'updated')  return new Date(b.updated_at) - new Date(a.updated_at);
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+
+      const total = sorted.length;
+      const start = (currentPage - 1) * PER_PAGE;
+      const page  = sorted.slice(start, start + PER_PAGE);
+
+      const list = document.getElementById('post-list');
+
+      if (total === 0) {
+        list.innerHTML = `
+          <div class="state-box">
+            <span class="icon">💬</span>
+            <p>No posts yet in this category.<br>Be the first to post!</p>
+          </div>`;
+        document.getElementById('pagination').innerHTML = '';
+        return;
+      }
+
+      list.innerHTML = page.map(issue => {
+        const cat   = getCategory(issue);
+        const label = TAG_LABEL[cat] || 'General';
+        const cls   = TAG_CLASS[cat] || 'tag-general';
+        const avatar = issue.user.avatar_url;
+        const login  = issue.user.login;
+        const initials = login.slice(0, 2).toUpperCase();
+        const excerpt = (issue.body || '').replace(/[#*`>\[\]]/g, '').trim().slice(0, 100);
+        const date = new Date(issue.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        return `
+          <a class="post-card" href="${issue.html_url}" target="_blank" rel="noopener">
+            <div class="post-meta-left">
+              <div class="post-avatar">
+                <img src="${avatar}" alt="${login}" onerror="this.style.display='none';this.parentNode.textContent='${initials}'">
+              </div>
+            </div>
+            <div class="post-body">
+              <div class="post-title">${escHtml(issue.title)}</div>
+              ${excerpt ? `<div class="post-excerpt">${escHtml(excerpt)}&hellip;</div>` : ''}
+              <div class="post-tags">
+                <span class="tag ${cls}">${label}</span>
+                <span class="post-time">${escHtml(login)} &middot; ${date}</span>
+              </div>
+            </div>
+            <div class="post-stats">
+              <span class="stat">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1h11v8H7l-3 3V9H1V1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                ${issue.comments}
+              </span>
+              <span class="stat">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6.5 9l-3 1.5.5-3.5L1.5 4.5 5 4z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+                ${issue.reactions ? issue.reactions['+1'] || 0 : 0}
+              </span>
+            </div>
+          </a>`;
+      }).join('');
+
+      renderPagination(total);
+    }
+
+    function renderPagination(total) {
+      const pages = Math.ceil(total / PER_PAGE);
+      const pg = document.getElementById('pagination');
+      if (pages <= 1) { pg.innerHTML = ''; return; }
+
+      let html = `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&larr;</button>`;
+      for (let i = 1; i <= pages; i++) {
+        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+      }
+      html += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === pages ? 'disabled' : ''}>&rarr;</button>`;
+      pg.innerHTML = html;
+    }
+
+    function goPage(n) {
+      currentPage = n;
+      renderPosts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterCategory(cat, btn) {
+      activeCategory = cat;
+      currentPage = 1;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const titles = { all: 'All Posts', general: 'General', bug: 'Bug Reports', suggestion: 'Suggestions', 'fan content': 'Fan Content' };
+      document.getElementById('category-title').textContent = titles[cat] || 'All Posts';
+      renderPosts();
+    }
+
+    function changeSort(val) {
+      sortBy = val;
+      currentPage = 1;
+      fetchIssues();
+    }
+
+    function openModal()  { document.getElementById('modal').classList.add('open'); }
+    function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+    function buildIssueUrl() {
+      const title = document.getElementById('post-title').value.trim();
+      const cat   = document.getElementById('post-category').value;
+      if (!title) { document.getElementById('post-title').focus(); return false; }
+      const label = encodeURIComponent(cat.toLowerCase());
+      const t     = encodeURIComponent(title);
+      const body  = encodeURIComponent(`**Category:** ${cat}\n\n`);
+      document.getElementById('modal-submit').href =
+        `${REPO_NEW}?title=${t}&body=${body}&labels=${label}`;
+      closeModal();
+      return true;
+    }
+
+    document.getElementById('modal').addEventListener('click', e => {
+      if (e.target === document.getElementById('modal')) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    fetchIssues();
+  </script>
+
+</body>
+</html>
