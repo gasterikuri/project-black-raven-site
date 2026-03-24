@@ -208,16 +208,16 @@
 
     #raven-canvas {
       display: block;
-      border-radius: 12px;
+      border-radius: 50%;
       box-shadow: 0 0 40px rgba(200,169,110,0.15);
       transition: box-shadow 0.3s, transform 0.3s;
-      max-width: 300px;
+      max-width: 320px;
       width: 100%;
     }
 
     #raven-canvas:hover {
-      box-shadow: 0 0 60px rgba(200,169,110,0.3);
-      transform: scale(1.02);
+      box-shadow: 0 0 70px rgba(200,169,110,0.35);
+      transform: scale(1.03);
     }
 
     .hero-eyebrow {
@@ -544,95 +544,138 @@
       idleTimer = setTimeout(() => { mouseActive = false; }, 2000);
     });
 
-    // Binary raven canvas
+    // Binary ring + raven logo canvas
     (function() {
       const canvas = document.getElementById('raven-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const W = 300, H = 300;
-      const COLS = 38, ROWS = 38;
-      const CELL = W / COLS;
+      const W = 320, H = 320;
+      canvas.width = W; canvas.height = H;
+      const CX = W/2, CY = H/2;
 
-      const offscreen = document.createElement('canvas');
-      offscreen.width = W; offscreen.height = H;
-      const oc = offscreen.getContext('2d');
-      oc.fillStyle = '#fff';
-      oc.beginPath();
-      oc.moveTo(150,240);
-      oc.bezierCurveTo(90,232,60,195,68,150);
-      oc.bezierCurveTo(64,120,75,98,98,90);
-      oc.bezierCurveTo(105,68,116,56,131,58);
-      oc.bezierCurveTo(139,52,154,45,161,51);
-      oc.bezierCurveTo(165,54,157,62,150,64);
-      oc.bezierCurveTo(165,60,180,68,188,82);
-      oc.bezierCurveTo(202,75,233,71,248,82);
-      oc.bezierCurveTo(262,94,259,116,240,124);
-      oc.bezierCurveTo(255,128,266,139,259,150);
-      oc.bezierCurveTo(251,161,232,157,221,154);
-      oc.bezierCurveTo(229,169,225,188,210,199);
-      oc.bezierCurveTo(203,218,188,233,176,240);
-      oc.bezierCurveTo(183,248,180,259,169,263);
-      oc.bezierCurveTo(161,266,154,259,157,251);
-      oc.bezierCurveTo(155,247,153,244,150,240);
-      oc.closePath();
-      oc.fill();
-      oc.beginPath();
-      oc.moveTo(131,58);
-      oc.bezierCurveTo(124,41,118,30,121,22);
-      oc.bezierCurveTo(126,28,129,39,133,49);
-      oc.moveTo(139,52);
-      oc.bezierCurveTo(137,37,139,26,143,19);
-      oc.bezierCurveTo(145,26,143,39,144,49);
-      oc.strokeStyle='#fff'; oc.lineWidth=2.5; oc.stroke();
+      // Self-contained FPS — does not depend on outer detectedFPS
+      let fps = 60;
+      let fpsSamples = [], fpsLast = 0, fpsReady = false;
 
-      const imgData = oc.getImageData(0,0,W,H).data;
-      function isRaven(col,row) {
-        let hits=0,total=0;
-        for(let dy=-1;dy<=1;dy++){for(let dx=-1;dx<=1;dx++){
-          const x=Math.min(W-1,Math.max(0,Math.floor((col+0.5)*CELL)+dx));
-          const y=Math.min(H-1,Math.max(0,Math.floor((row+0.5)*CELL)+dy));
-          if(imgData[(y*W+x)*4]>128)hits++;total++;
-        }}
-        return hits/total>0.4;
-      }
-
-      const chars=[];
-      for(let c=0;c<COLS;c++){for(let r=0;r<ROWS;r++){
-        chars.push({col:c,row:r,char:Math.random()<0.5?'1':'0',
-          inside:isRaven(c,r),phase:Math.random()*Math.PI*2,
-          speed:0.004+Math.random()*0.008});
-      }}
-
-      let t=0;
-      function drawRaven(){
-        ctx.fillStyle='#0a0a0c';
-        ctx.fillRect(0,0,W,H);
-        ctx.font=`bold ${Math.floor(CELL*0.7)}px monospace`;
-        ctx.textAlign='center';
-        ctx.textBaseline='middle';
-        for(const ch of chars){
-          const pulse=0.5+0.5*Math.sin(t*ch.speed*60+ch.phase);
-          const x=(ch.col+0.5)*CELL,y=(ch.row+0.5)*CELL;
-          if(Math.random()<0.002)ch.char=ch.char==='1'?'0':'1';
-          if(ch.inside){
-            const a=0.55+0.45*pulse;
-            ctx.shadowColor=`rgba(200,169,110,${a})`;
-            ctx.shadowBlur=5+4*pulse;
-            ctx.fillStyle=`rgba(${Math.floor(200+28*pulse)},${Math.floor(169+30*pulse)},${Math.floor(110+50*pulse)},${a})`;
-          } else {
-            ctx.shadowBlur=0;
-            ctx.fillStyle=`rgba(100,95,120,${0.04+0.04*pulse})`;
-          }
-          ctx.fillText(ch.char,x,y);
+      const chars = [];
+      const ringDefs = [
+        { r: 116, count: 50, size: 11 },
+        { r: 134, count: 60, size: 9  },
+      ];
+      ringDefs.forEach(ring => {
+        for (let i = 0; i < ring.count; i++) {
+          chars.push({
+            angle: (i / ring.count) * Math.PI * 2,
+            r: ring.r, size: ring.size,
+            char: Math.random() < 0.5 ? '1' : '0',
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.003 + Math.random() * 0.006,
+            currentAlpha: 0,
+            flipProgress: 1, flipped: false,
+            drift: (Math.random() - 0.5) * 0.0004,
+          });
         }
-        ctx.shadowBlur=0;
-        t++;
-        requestAnimationFrame(drawRaven);
+      });
+
+      const logo = new Image();
+      logo.crossOrigin = 'anonymous';
+      logo.src = 'black raven logo.jpg';
+      let logoReady = false;
+      logo.onload = () => { logoReady = true; };
+
+      let t = 0, lastFrame = 0;
+
+      function detect(ts) {
+        if (fpsLast) {
+          const d = ts - fpsLast;
+          if (d > 2 && d < 50) fpsSamples.push(1000 / d);
+        }
+        fpsLast = ts;
+        if (fpsSamples.length < 40) { requestAnimationFrame(detect); return; }
+        const avg = fpsSamples.reduce((a,b)=>a+b,0)/fpsSamples.length;
+        const known = [60,72,75,90,100,120,144];
+        fps = known.reduce((p,c) => Math.abs(c-avg)<Math.abs(p-avg)?c:p);
+        fps = Math.min(144, Math.max(60, fps));
+        fpsReady = true;
+        requestAnimationFrame(draw);
       }
-      drawRaven();
+
+      function draw(ts) {
+        requestAnimationFrame(draw);
+        const budget = 1000 / fps;
+        const elapsed = ts - lastFrame;
+        if (elapsed < budget * 0.9) return;
+        lastFrame = ts - (elapsed % budget);
+        const delta = Math.min(elapsed, 50) / (1000/60);
+
+        ctx.clearRect(0, 0, W, H);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        for (const ch of chars) {
+          ch.angle += ch.drift * delta;
+          const pulse = 0.5 + 0.5 * Math.sin(t * ch.speed + ch.phase);
+          const targetA = 0.5 + 0.5 * pulse;
+          ch.currentAlpha += (targetA - ch.currentAlpha) * 0.1;
+
+          if (ch.flipProgress < 1) {
+            ch.flipProgress = Math.min(1, ch.flipProgress + 0.07 * delta);
+            if (ch.flipProgress >= 0.5 && !ch.flipped) {
+              ch.char = ch.char === '1' ? '0' : '1';
+              ch.flipped = true;
+            }
+          } else if (Math.random() < 0.0012 * delta) {
+            ch.flipProgress = 0; ch.flipped = false;
+          }
+
+          const dispA = ch.currentAlpha * (ch.flipProgress < 0.5 ? ch.flipProgress * 2 : 1);
+          const x = CX + Math.cos(ch.angle) * ch.r;
+          const y = CY + Math.sin(ch.angle) * ch.r;
+          const r2 = Math.floor(200 + 28 * pulse);
+          const g2 = Math.floor(169 + 30 * pulse);
+          const b2 = Math.floor(110 + 50 * pulse);
+
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(ch.angle + Math.PI / 2);
+          ctx.font = `bold ${ch.size}px monospace`;
+          ctx.shadowColor = `rgba(${r2},${g2},${b2},${dispA * 0.85})`;
+          ctx.shadowBlur = 8 + 5 * pulse;
+          ctx.fillStyle = `rgba(${r2},${g2},${b2},${dispA})`;
+          ctx.fillText(ch.char, 0, 0);
+          ctx.restore();
+        }
+
+        ctx.shadowBlur = 0;
+
+        // Logo clipped to circle
+        const imgR = 100;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(CX, CY, imgR, 0, Math.PI * 2);
+        ctx.clip();
+        if (logoReady) {
+          ctx.drawImage(logo, CX - imgR, CY - imgR, imgR * 2, imgR * 2);
+        } else {
+          ctx.fillStyle = '#1c1c24';
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Breathing gold border
+        ctx.beginPath();
+        ctx.arc(CX, CY, imgR + 1.5, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(200,169,110,${0.5 + 0.3 * Math.sin(t * 0.02)})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        t += delta * 0.5;
+      }
+
+      requestAnimationFrame(detect);
     })();
 
-    // Idle shimmer for social buttons
+            // Idle shimmer for social buttons
     (function idleShimmer() {
       if (!mouseActive) {
         idleAngle += 0.4;
@@ -648,4 +691,3 @@
   </script>
 </body>
 </html>
-
