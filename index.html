@@ -31,6 +31,40 @@
 
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
+    /* ── LANTERN FLICKER EFFECT ── */
+    @keyframes lantern-flicker {
+      0%   { text-shadow: 0 0 6px rgba(200,169,110,0.5), 0 0 18px rgba(200,169,110,0.2); opacity: 1; }
+      4%   { text-shadow: 0 0 3px rgba(200,169,110,0.3), 0 0 8px rgba(200,169,110,0.1);  opacity: 0.88; }
+      8%   { text-shadow: 0 0 8px rgba(200,169,110,0.6), 0 0 24px rgba(200,169,110,0.25); opacity: 1; }
+      15%  { text-shadow: 0 0 5px rgba(200,169,110,0.4), 0 0 14px rgba(200,169,110,0.15); opacity: 0.95; }
+      20%  { text-shadow: 0 0 2px rgba(200,169,110,0.2), 0 0 6px rgba(200,169,110,0.08);  opacity: 0.82; }
+      22%  { text-shadow: 0 0 9px rgba(200,169,110,0.65), 0 0 28px rgba(200,169,110,0.28); opacity: 1; }
+      40%  { text-shadow: 0 0 7px rgba(200,169,110,0.55), 0 0 20px rgba(200,169,110,0.22); opacity: 0.97; }
+      55%  { text-shadow: 0 0 4px rgba(200,169,110,0.35), 0 0 12px rgba(200,169,110,0.12); opacity: 0.9; }
+      60%  { text-shadow: 0 0 2px rgba(200,169,110,0.2), 0 0 5px rgba(200,169,110,0.07);  opacity: 0.8; }
+      62%  { text-shadow: 0 0 10px rgba(200,169,110,0.7), 0 0 30px rgba(200,169,110,0.3); opacity: 1; }
+      75%  { text-shadow: 0 0 6px rgba(200,169,110,0.5), 0 0 18px rgba(200,169,110,0.2); opacity: 0.96; }
+      88%  { text-shadow: 0 0 3px rgba(200,169,110,0.3), 0 0 9px rgba(200,169,110,0.1);  opacity: 0.85; }
+      92%  { text-shadow: 0 0 8px rgba(200,169,110,0.6), 0 0 22px rgba(200,169,110,0.24); opacity: 1; }
+      100% { text-shadow: 0 0 6px rgba(200,169,110,0.5), 0 0 18px rgba(200,169,110,0.2); opacity: 1; }
+    }
+    @keyframes lantern-soft {
+      0%   { text-shadow: 0 0 4px rgba(200,169,110,0.25), 0 0 12px rgba(200,169,110,0.08); opacity: 1; }
+      7%   { text-shadow: 0 0 2px rgba(200,169,110,0.15), 0 0 5px rgba(200,169,110,0.05);  opacity: 0.9; }
+      14%  { text-shadow: 0 0 6px rgba(200,169,110,0.35), 0 0 16px rgba(200,169,110,0.12); opacity: 1; }
+      35%  { text-shadow: 0 0 3px rgba(200,169,110,0.2), 0 0 8px rgba(200,169,110,0.06);   opacity: 0.92; }
+      50%  { text-shadow: 0 0 5px rgba(200,169,110,0.3), 0 0 14px rgba(200,169,110,0.1);   opacity: 0.96; }
+      65%  { text-shadow: 0 0 2px rgba(200,169,110,0.15), 0 0 4px rgba(200,169,110,0.04);  opacity: 0.87; }
+      70%  { text-shadow: 0 0 7px rgba(200,169,110,0.4), 0 0 18px rgba(200,169,110,0.14);  opacity: 1; }
+      100% { text-shadow: 0 0 4px rgba(200,169,110,0.25), 0 0 12px rgba(200,169,110,0.08); opacity: 1; }
+    }
+    .site-title         { animation: lantern-flicker 6s ease-in-out infinite; }
+    .hero h2            { animation: lantern-flicker 7s ease-in-out infinite 0.4s; }
+    .hero-eyebrow       { animation: lantern-flicker 5s ease-in-out infinite 1.2s; }
+    .about-card h2      { animation: lantern-flicker 6s ease-in-out infinite 0.8s; }
+    .hero .tagline      { animation: lantern-soft 8s ease-in-out infinite; }
+    .hero .contact-link { animation: lantern-soft 7s ease-in-out infinite 1.5s; }
+
     body {
       font-family: 'Open Sans', sans-serif;
       background-color: var(--black);
@@ -305,8 +339,10 @@
 
     .social-buttons a {
       display: block;
-      background: var(--card);
-      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #2e2e3e 0%, #1c1c26 40%, #14141c 100%);
+      border: 1px solid rgba(255,255,255,0.12);
       border-right: none;
       color: var(--muted);
       text-decoration: none;
@@ -317,19 +353,60 @@
       padding: 0.55rem 0.85rem;
       border-radius: 6px 0 0 6px;
       white-space: nowrap;
-      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      transition: color 0.2s, border-color 0.3s, box-shadow 0.3s;
       writing-mode: horizontal-tb;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -1px 0 rgba(0,0,0,0.4),
+        inset 1px 0 0 rgba(255,255,255,0.04);
+    }
+
+    /* RTX reflection layer — moves via JS mouse tracking */
+    .social-buttons a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80px 120% at var(--rx, 50%) var(--ry, -30%),
+        rgba(255,255,255,0.22) 0%,
+        rgba(200,169,110,0.12) 30%,
+        transparent 70%
+      );
+      pointer-events: none;
+      transition: opacity 0.3s;
+      opacity: 0.7;
+      border-radius: 6px 0 0 6px;
+    }
+
+    /* static top-edge chrome highlight */
+    .social-buttons a::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35) 40%, rgba(255,255,255,0.15) 70%, transparent);
+      pointer-events: none;
     }
 
     .social-buttons a:hover {
       color: var(--gold);
-      background: var(--surface);
-      border-color: rgba(200,169,110,0.3);
+      border-color: rgba(200,169,110,0.5);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        inset 1px 0 0 rgba(255,255,255,0.06),
+        0 0 16px rgba(200,169,110,0.18),
+        0 0 40px rgba(200,169,110,0.06);
     }
+
+    .social-buttons a:hover::before { opacity: 1; }
 
     .social-buttons .itchio-button {
       color: var(--gold);
-      border-color: rgba(200,169,110,0.25);
+      border-color: rgba(200,169,110,0.35);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -1px 0 rgba(0,0,0,0.4),
+        0 0 10px rgba(200,169,110,0.12);
     }
 
     /* ── FOOTER ── */
@@ -399,7 +476,7 @@
         <p class="tagline">Dedicated to delivering high-quality creations and unforgettable experiences.</p>
         <p class="contact-link">
           Business inquiries:
-          <a href="mailto:ProjectBlackRavenDevolpment@outlook.com">ProjectBlackRavenDevolpment@outlook.com</a>
+          <a href="/cdn-cgi/l/email-protection#d383a1bcb9b6b0a791bfb2b0b881b2a5b6bd97b6a5bcbfa3beb6bda793bca6a7bfbcbcb8fdb0bcbe"><span class="__cf_email__" data-cfemail="d787a5b8bdb2b4a395bbb6b4bc85b6a1b2b993b2a1b8bba7bab2b9a397b8a2a3bbb8b8bcf9b4b8ba">[email&#160;protected]</span></a>
         </p>
       </section>
 
@@ -437,19 +514,54 @@
 
   </div>
 
-  <script>
+    <script>
     const maintenanceMode = false;
 
     function updateMaintenanceMode(state) {
       const overlay = document.getElementById('maintenance-notification');
-      const content = document.querySelector('.page-content');
+      const page    = document.querySelector('.page-content');
       overlay.style.display = state ? 'flex' : 'none';
-      content.style.filter  = state ? 'blur(6px)' : 'none';
+      page.style.filter     = state ? 'blur(6px)' : 'none';
     }
 
     document.addEventListener('DOMContentLoaded', () => updateMaintenanceMode(maintenanceMode));
-  </script>
 
+    // RTX reflection: track mouse and update each button's radial light origin
+    const socialLinks = document.querySelectorAll('.social-buttons a');
+
+    document.addEventListener('mousemove', e => {
+      socialLinks.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const rx = ((e.clientX - rect.left) / rect.width)  * 100;
+        const ry = ((e.clientY - rect.top)  / rect.height) * 100;
+        btn.style.setProperty('--rx', rx + '%');
+        btn.style.setProperty('--ry', ry + '%');
+      });
+    });
+
+    // Idle shimmer: slowly drifts the reflection when mouse is still
+    let idleAngle = 0;
+    let mouseActive = false;
+    let idleTimer = null;
+
+    document.addEventListener('mousemove', () => {
+      mouseActive = true;
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => { mouseActive = false; }, 2000);
+    });
+
+    (function idleShimmer() {
+      if (!mouseActive) {
+        idleAngle += 0.4;
+        const rx = 50 + 45 * Math.sin(idleAngle * Math.PI / 180);
+        const ry = 50 + 30 * Math.cos(idleAngle * 0.7 * Math.PI / 180);
+        socialLinks.forEach(btn => {
+          btn.style.setProperty('--rx', rx + '%');
+          btn.style.setProperty('--ry', ry + '%');
+        });
+      }
+      requestAnimationFrame(idleShimmer);
+    })();
+  </script>
 </body>
 </html>
-<link rel="icon" href="project black raven logo offical.ico" type="image/x-icon">
