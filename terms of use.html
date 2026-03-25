@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Project Black Raven Terms of Service — rules and guidelines for using our site." />
+  <meta name="description" content="Project Black Raven Terms of Use" />
   <title>Terms of Use — Project Black Raven</title>
 
-  <link rel="icon" href="https://cdn.glitch.global/fa9d7eb2-8d74-4626-8026-935c6649d458/black%20raven%20icon.ico?v=1705197365841" type="image/x-icon" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
@@ -16,7 +16,6 @@
     :root {
       --black:   #0a0a0c;
       --deep:    #101014;
-      --surface: #16161c;
       --card:    #1c1c24;
       --border:  rgba(255,255,255,0.08);
       --gold:    #c8a96e;
@@ -29,7 +28,7 @@
 
     body {
       font-family: 'Open Sans', sans-serif;
-      background-color: var(--black);
+      background: var(--black);
       color: var(--text);
       line-height: 1.75;
       min-height: 100vh;
@@ -47,6 +46,10 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
       position: relative;
     }
 
@@ -98,7 +101,7 @@
       content: '';
       position: absolute;
       top: 0; left: 50%; transform: translateX(-50%);
-      width: 500px; height: 300px;
+      width: 500px; height: 260px;
       background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.09) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -112,25 +115,22 @@
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 500;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
-    .page-eyebrow::before,
-    .page-eyebrow::after {
-      content: '';
-      display: block;
+    .page-eyebrow::before, .page-eyebrow::after {
+      content: ''; display: block;
       width: 24px; height: 1px;
-      background: var(--gold);
-      opacity: 0.4;
+      background: var(--gold); opacity: 0.4;
     }
 
     .page-hero h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
       color: #fff;
       letter-spacing: 0.04em;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .page-hero p {
@@ -139,59 +139,12 @@
       font-weight: 300;
     }
 
-    /* ── LAYOUT ── */
-    .layout {
-      display: flex;
-      max-width: 1100px;
+    /* ── CONTENT ── */
+    .content {
+      max-width: 700px;
       margin: 3rem auto;
       padding: 0 2rem;
-      gap: 2.5rem;
-      align-items: flex-start;
       flex: 1;
-    }
-
-    /* ── TOC SIDEBAR ── */
-    .toc {
-      width: 220px;
-      flex-shrink: 0;
-      position: sticky;
-      top: 1.5rem;
-    }
-
-    .toc-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-
-    .toc ul { list-style: none; }
-
-    .toc li { border-left: 1px solid var(--border); }
-
-    .toc a {
-      display: block;
-      padding: 0.4rem 0.85rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s, border-color 0.2s;
-      border-left: 2px solid transparent;
-      margin-left: -1px;
-    }
-
-    .toc a:hover {
-      color: var(--gold);
-      border-left-color: var(--gold);
-    }
-
-    /* ── MAIN CONTENT ── */
-    .terms-content {
-      flex: 1;
-      min-width: 0;
     }
 
     .terms-section {
@@ -200,16 +153,16 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .terms-section:last-of-type { border-bottom: none; }
+    .terms-section:last-of-type { border-bottom: none; margin-bottom: 0; }
 
     .terms-section h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--gold);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.9rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -223,33 +176,25 @@
     }
 
     .terms-section p {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--muted);
       font-weight: 300;
-      margin-bottom: 1rem;
       line-height: 1.85;
     }
 
-    .terms-section p:last-child { margin-bottom: 0; }
-
-    .terms-section strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    /* Notice box */
     .notice-box {
       background: rgba(200,169,110,0.07);
       border: 1px solid rgba(200,169,110,0.2);
       border-left: 3px solid var(--gold);
       border-radius: 8px;
       padding: 1.25rem 1.5rem;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
     }
 
     .notice-box p {
       font-size: 0.85rem;
       color: var(--muted);
+      font-weight: 300;
       margin: 0;
     }
 
@@ -261,120 +206,74 @@
       border-top: 1px solid var(--border);
       text-align: center;
       padding: 2rem;
+      margin-top: auto;
     }
 
-    footer p {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
+    footer p { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
     footer span { color: rgba(200,169,110,0.55); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .toc { display: none; }
-      .layout { padding: 0 1.25rem; margin: 2rem auto; }
-    }
 
     @media (max-width: 480px) {
       header { justify-content: center; text-align: center; }
+      .content { padding: 0 1.25rem; margin: 2rem auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <a href="https://gasterikuri.github.io/project-black-raven-site/" class="site-title">Project Black Raven</a>
     <nav aria-label="Main navigation">
       <ul>
         <li><a href="https://gasterikuri.github.io/project-black-raven-site/">Home</a></li>
-        <li><a href="project%20black%20raven%20project%20progress%20devlog.html">More Info</a></li>
+        <li><a href="support.html">Support</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Page Hero -->
   <div class="page-hero">
     <div class="page-eyebrow">Legal</div>
     <h1>Terms of Use</h1>
     <p>Last updated &mdash; 2025 &nbsp;&middot;&nbsp; Project Black Raven</p>
   </div>
 
-  <div class="layout">
+  <div class="content">
 
-    <!-- Table of Contents -->
-    <aside class="toc" aria-label="Table of contents">
-      <span class="toc-label">Contents</span>
-      <ul>
-        <li><a href="#s1">1. Acceptable Use</a></li>
-        <li><a href="#s2">2. Account Management</a></li>
-        <li><a href="#s3">3. Content Ownership</a></li>
-        <li><a href="#s4">4. Cookies</a></li>
-        <li><a href="#s5">5. Modifications</a></li>
-        <li><a href="#s6">6. Termination</a></li>
-        <li><a href="#s7">7. Limitation of Liability</a></li>
-        <li><a href="#s8">8. Governing Law</a></li>
-      </ul>
-    </aside>
+    <div class="terms-section">
+      <h2>What this site is</h2>
+      <p>Project Black Raven is a personal game development and creative project site. It exists to share progress updates, videos, and information about ongoing projects. There are no accounts, no logins, no purchases, and no data collection of any kind.</p>
+    </div>
 
-    <!-- Terms Content -->
-    <main class="terms-content">
+    <div class="terms-section">
+      <h2>No data collection</h2>
+      <p>This site does not collect, store, or share any personal information. There are no cookies, no tracking scripts, no analytics, and no third-party advertising. Visiting this site is completely anonymous.</p>
+    </div>
 
-      <section class="terms-section" id="s1">
-        <h2>1. Acceptable Use</h2>
-        <p><strong>Impersonation:</strong> You are not permitted to impersonate any staff member or representative of Project Black Raven. Misleading others about your identity or credentials is strictly prohibited.</p>
-        <p><strong>Respectful Use:</strong> Use the site in a manner that respects others. Activities such as spamming, harassment, or uploading malicious content can result in immediate consequences.</p>
-        <p><strong>Legal Use:</strong> You agree not to engage in any illegal activities, including but not limited to sharing pirated content or fraudulent actions.</p>
-      </section>
+    <div class="terms-section">
+      <h2>Content ownership</h2>
+      <p>All original content on this site — including text, images, logos, and project materials — belongs to Project Black Raven. Please don't reproduce or redistribute it without permission. If you'd like to share something, linking back to the site is always appreciated.</p>
+    </div>
 
-      <section class="terms-section" id="s2">
-        <h2>2. Account Management &amp; Security</h2>
-        <p><strong>Account Creation:</strong> If certain features require you to create an account, you agree to provide current and accurate information. You are responsible for the confidentiality of your credentials.</p>
-        <p><strong>Security:</strong> It is your responsibility to safeguard your account. If you believe your account has been compromised, please contact us immediately. Project Black Raven is not liable for any unauthorized use of your account.</p>
-        <p><strong>Account Suspension or Termination:</strong> We reserve the right to suspend or terminate your access should you violate these Terms. In the case of a severe violation, such action may be taken immediately without prior notice.</p>
-      </section>
+    <div class="terms-section">
+      <h2>External links</h2>
+      <p>This site links to external platforms like YouTube, GitHub, Discord, Twitch, and itch.io. Once you leave this site, those platforms' own terms and privacy policies apply. Project Black Raven has no control over external content.</p>
+    </div>
 
-      <section class="terms-section" id="s3">
-        <h2>3. Content Ownership &amp; User-Generated Content</h2>
-        <p><strong>Site Content:</strong> All text, graphics, logos, images, videos, and software on the site are owned or licensed by Project Black Raven and are protected by copyright laws. Unauthorized reproduction, distribution, or use is prohibited.</p>
-        <p><strong>User-Generated Content:</strong> By submitting content (such as comments or feedback), you grant Project Black Raven a non-exclusive, royalty-free license to use, display, and distribute your content as part of our services. You confirm that any content you submit does not infringe upon the intellectual property rights of others.</p>
-        <p><strong>Content Guidelines:</strong> All uploaded content must comply with our community guidelines. You are prohibited from submitting harmful, illegal, abusive, or offensive material. We reserve the right to remove any content that violates these guidelines.</p>
-      </section>
+    <div class="terms-section">
+      <h2>Community conduct</h2>
+      <p>If you interact with Project Black Raven through linked platforms like Discord or GitHub Issues, please be respectful. Harassment, spam, or abusive behaviour may result in being removed from those spaces.</p>
+    </div>
 
-     
+    <div class="terms-section">
+      <h2>Changes to these terms</h2>
+      <p>These terms may be updated occasionally as the site grows. Any changes will be posted here. Continued use of the site means you're okay with whatever is currently written on this page.</p>
+    </div>
 
-      <section class="terms-section" id="s5">
-        <h2>5. Modifications to the Terms</h2>
-        <p>Project Black Raven reserves the right to update or modify these Terms at any time. Changes will be posted on this page and take effect immediately upon posting. Continued use of the site after such updates constitutes acceptance of the new Terms.</p>
-      </section>
+    <div class="notice-box" role="note">
+      <p><strong>That's it.</strong> This is a small personal project site — no fine print, no legal traps. If you have any questions, reach out at <a href="mailto:projectblackravendevolpment@outlook.com" style="color:var(--gold);text-decoration:none;">projectblackravendevolpment@outlook.com</a>.</p>
+    </div>
 
-      <section class="terms-section" id="s6">
-        <h2>6. Termination of Access</h2>
-        <p>We reserve the right to terminate or suspend your access to the site at any time if we determine that your behavior is in violation of these Terms. Upon termination, your access to the site and any associated accounts will be revoked.</p>
-      </section>
-
-      <section class="terms-section" id="s7">
-        <h2>7. Limitation of Liability</h2>
-        <p><strong>No Warranty:</strong> The site and all associated content are provided "as is," without any express or implied warranties. We do not guarantee uninterrupted, error-free, or secure access, and your use of the site is at your own risk.</p>
-        <p><strong>External Links:</strong> While we carefully monitor the links provided on our site, we are not responsible for the content or safety of external sites. Accessing any external link is at your own risk.</p>
-        <p><strong>Fraudulent Sites:</strong> While we strive to ensure you are accessing the official Project Black Raven website, you are responsible for verifying the URL. We are not liable for any damages or issues arising from fraudulent sites.</p>
-      </section>
-
-      <section class="terms-section" id="s8">
-        <h2>8. Governing Law &amp; Dispute Resolution</h2>
-        <p>These Terms are governed by the laws applicable in your jurisdiction. Any disputes arising from the use of the site shall be subject to the exclusive jurisdiction of the courts within your area.</p>
-      </section>
-
-      <div class="notice-box" role="note">
-        <p><strong>Notice:</strong> We may update our Terms of Service at our sole discretion. Continued use of the site indicates your acceptance of any changes. Additionally, we reserve the right to terminate your access to the site if your behavior is deemed to violate the above Terms.</p>
-      </div>
-
-    </main>
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Project Black Raven. <span>All rights reserved.</span></p>
   </footer>
